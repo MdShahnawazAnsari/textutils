@@ -17,8 +17,12 @@ export default function Form(props) {
   };
 
   const reverseWord = () => {
-    setText(text.split(' ').reverse().join(' '))
-    props.showAlert("Word has been Reversed!", "success")
+    if (text.split(' ').length > 1) {
+      setText(text.split(' ').reverse().join(' '))
+      props.showAlert("Word has been Reversed!", "success")
+    } else {
+      props.showAlert("At least write two word", "warning")
+    }
   }
 
   const reverseChar = () => {
@@ -27,8 +31,8 @@ export default function Form(props) {
   }
 
   const camelCase = () => {
+    if (text.length>1) {
     let newArr = [];
-    // setText(text.toLowerCase())
     text.split(' ').map(item => {
       if (/[a-z]/ig.test(item)) {
         if (/[a-z]/i.test(item[0])) {
@@ -42,11 +46,15 @@ export default function Form(props) {
 
     setText(newArr.join(' '))
     props.showAlert("Text converted into Camel Case!", "success")
+  } else {
+    props.showAlert("At least write two Charecters", "warning")
+  }
   }
 
   const clear = () => {
     setText('')
     props.showAlert("Text Cleared!", "success")
+    
   };
 
   return (
@@ -59,15 +67,15 @@ export default function Form(props) {
           </div>
         </div>
         <div>
-          <button className="btn btn-primary mx-2 my-2" onClick={convertUp}>UpperCase</button>
-          <button className="btn btn-primary mx-2 my-2" onClick={convertLow}>LowerCase</button>
-          <button className="btn btn-primary mx-2 my-2" onClick={reverseWord}>Reverse Words</button>
-          <button className="btn btn-primary mx-2 my-2" onClick={reverseChar}>Reverse Charecters</button>
-          <button className="btn btn-primary mx-2 my-2" onClick={camelCase}>Camel Case</button>
-          <button className="btn btn-primary mx-2 my-2" onClick={clear}>Clear</button>
+          <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={convertUp}>UpperCase</button>
+          <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={convertLow}>LowerCase</button>
+          <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={reverseWord}>Reverse Words</button>
+          <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={reverseChar}>Reverse Charecters</button>
+          <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={camelCase}>Camel Case</button>
+          <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={clear}>Clear</button>
         </div>
         <div className="container">
-          <h5>Total words are {text.split(' ').length} and Charecters are {text.length}</h5>
+          <h5>Total words are {text.split(/\s+/).filter((elem)=>{return elem !== '' }).length} and Charecters are {text.length}</h5>
         </div>
         <div className="container">
           <h3>Preview</h3>

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import Alert from "./components/Alert";
 import Form from "./components/Form";
-import About from "./components/About";
+// import About from "./components/About";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default function App() {
@@ -44,19 +44,19 @@ export default function App() {
 
   return (
     <>
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
           <Route
             path="/"
             element={
-              <>
+              <> */}
                 <Navbar mode={dmode} color={colorObj} toggleMode={toggleMode} />
                 <Alert alert={alert} />
                 <Form showAlert={showAlert} color={colorObj} mode={dmode} />
-              </>
+              {/* </>
             }
-          />
-
+          /> */}
+{/* 
           <Route
             path="/About"
             element={
@@ -68,7 +68,7 @@ export default function App() {
             }
           />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
     </>
   );
 }
